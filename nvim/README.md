@@ -148,6 +148,15 @@ Backup before this IDE extension:
 
 ## Install on another Arch machine
 
+Copy and paste this one command into the laptop's terminal:
+
+```sh
+bash <(curl -fsSL https://raw.githubusercontent.com/CameronConroy/CC-Dotfiles/main/nvim/install.sh)
+```
+
+The installer handles the packages, nvim-only download, backup, and symlink.
+The manual commands are below in case they are ever needed.
+
 Install the system tools and matching font:
 
 ```sh
