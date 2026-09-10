@@ -155,17 +155,21 @@ sudo pacman -S --needed neovim git ripgrep fd fzf lazygit clang cmake ninja \
   python ttf-jetbrains-mono-nerd
 ```
 
-Clone the dotfiles and link this directory into Neovim's standard location:
+Use a sparse clone so Git checks out only the Neovim directory, then link it
+into Neovim's standard location:
 
 ```sh
-git clone https://github.com/CameronConroy/CC-Dotfiles.git ~/dotfiles
+git clone --filter=blob:none --sparse \
+  https://github.com/CameronConroy/CC-Dotfiles.git \
+  ~/.local/share/nvim-config
+git -C ~/.local/share/nvim-config sparse-checkout set nvim
 mkdir -p ~/.config
-mv ~/.config/nvim ~/.config/nvim.backup
-ln -s ~/dotfiles/nvim ~/.config/nvim
+[ -e ~/.config/nvim ] && mv ~/.config/nvim ~/.config/nvim.backup
+ln -s ~/.local/share/nvim-config/nvim ~/.config/nvim
 nvim
 ```
 
-Skip the `mv` command when `~/.config/nvim` does not exist. The first Neovim
-launch downloads plugins and language tools. Matugen colors are used when the
-full desktop dotfiles provide `~/.config/hypr/scripts/quickshell/qs_colors.json`;
-otherwise the editor safely falls back to Tokyo Night.
+The first Neovim launch downloads plugins and language tools. Update later
+with `git -C ~/.local/share/nvim-config pull`. Matugen colors are used when
+`~/.config/hypr/scripts/quickshell/qs_colors.json` exists; otherwise the editor
+safely falls back to Tokyo Night.
