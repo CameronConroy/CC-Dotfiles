@@ -1,0 +1,38 @@
+-- Space is the leader key. Pause after Space to see available commands.
+vim.keymap.set("n", "<leader>fN", "<cmd>enew<cr>", { desc = "New File" })
+vim.keymap.set("n", "<leader>fC", function()
+  Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
+end, { desc = "Edit Neovim Config" })
+
+vim.keymap.set("n", "<F1>", function()
+  vim.cmd("tabnew " .. vim.fn.stdpath("config") .. "/README.md")
+end, { desc = "Beginner Help" })
+
+vim.keymap.set("n", "<leader>w", "<cmd>write<cr>", { desc = "Save File" })
+vim.keymap.set("n", "<leader>q", "<cmd>confirm quit<cr>", { desc = "Quit Window" })
+
+vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename Symbol" })
+vim.keymap.set("n", "<F4>", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Show Problems" })
+vim.keymap.set("n", "<F7>", function()
+  require("neotest").run.run()
+end, { desc = "Run Nearest Test" })
+vim.keymap.set({ "n", "x" }, "<F8>", function()
+  LazyVim.format({ force = true })
+end, { desc = "Format File" })
+
+vim.keymap.set("n", "<F6>", function()
+  require("config.ide").runFile()
+end, { desc = "Run File (Python / C / C++)" })
+
+vim.api.nvim_create_user_command("Run", function()
+  require("config.ide").runFile()
+end, { desc = "Run current Python, C, or C++ file", force = true })
+vim.api.nvim_create_user_command("Problems", function()
+  vim.cmd("Trouble diagnostics toggle")
+end, { desc = "Show lint and compiler problems", force = true })
+vim.api.nvim_create_user_command("Format", function()
+  LazyVim.format({ force = true })
+end, { desc = "Format current file", force = true })
+vim.api.nvim_create_user_command("Test", function()
+  require("neotest").run.run()
+end, { desc = "Run nearest test", force = true })

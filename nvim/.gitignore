@@ -1,0 +1,10 @@
+tt.*
+.tests
+doc/tags
+debug
+.repro
+foo.*
+*.log
+data
+# Generated whenever Matugen changes the desktop palette.
+matugen_colors.lua

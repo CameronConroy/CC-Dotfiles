@@ -1,0 +1,23 @@
+{
+  "CamelCase function": {
+    "prefix": "cfn",
+    "body": [
+      "${1:void} ${2:doSomething}(${3:int someValue}) {",
+      "    $0",
+      "}"
+    ],
+    "description": "Function with camelCase names"
+  },
+  "C++ main": {
+    "prefix": "cmain",
+    "body": [
+      "#include <iostream>",
+      "",
+      "int main() {",
+      "    ${0:std::cout << \"Hello\" << std::endl;}",
+      "    return 0;",
+      "}"
+    ],
+    "description": "C++ program entry point"
+  }
+}

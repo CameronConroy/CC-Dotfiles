@@ -1,0 +1,18 @@
+{
+  "CamelCase function": {
+    "prefix": "cfn",
+    "body": [
+      "def ${1:doSomething}(${2:someValue}):",
+      "    ${0:pass}"
+    ],
+    "description": "Function with camelCase names"
+  },
+  "CamelCase pytest": {
+    "prefix": "ctest",
+    "body": [
+      "def ${1:testSomething}():",
+      "    assert ${0:True}"
+    ],
+    "description": "camelCase pytest test"
+  }
+}
