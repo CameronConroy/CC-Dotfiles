@@ -1,3 +1,10 @@
 hypr/scripts/quickshell/calendar/.env
 **/.env
 **/.env
+
+# Code OSS machine-specific state
+code-oss/User/**/globalStorage/
+code-oss/User/**/workspaceStorage/
+code-oss/User/**/History/
+code-oss/User/**/state.vscdb
+code-oss/User/**/state.vscdb.backup
