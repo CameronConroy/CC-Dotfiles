@@ -239,7 +239,7 @@ PanelWindow {
 
     Timer {
         id: prepTimer
-        interval: 50
+        interval: 500
         property string newWidget: ""
         property string newArg: ""
         onTriggered: executeSwitch(newWidget, newArg, false)

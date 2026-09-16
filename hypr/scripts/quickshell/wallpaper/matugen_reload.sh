@@ -82,5 +82,3 @@ fi
 # Restart swayosd-server in the background
 killall swayosd-server 2>/dev/null
 swayosd-server --top-margin 0.9 --style "$HOME/.config/swayosd/style.css" > /dev/null 2>&1 &
-
-wait
