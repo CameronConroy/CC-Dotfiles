@@ -27,15 +27,25 @@ sudo pacman -S --needed \
     ttf-jetbrains-mono-nerd \
     fontconfig \
     mesa \
-    vulkan-radeon \
-    lib32-mesa \
     git \
     base-devel
+    
+    if lspci | grep -q "VGA.*NVIDIA"; then
+        GPU_PKGS="nvidia-utils lib32-nvidia-utils"
+    elif lspci | grep -q "VGA.*Radeon\|VGA.*AMD"; then
+        GPU_PKGS="vulkan-radeon lib32-vulkan-radeon"
+    else
+        GPU_PKGS="vulkan-intel lib32-vulkan-intel"
+    fi     
+
+sudo pacman -S --needed $GPU_PKGS
 
 # Enable services
 sudo systemctl enable --now NetworkManager
 sudo systemctl enable --now pipewire
 sudo systemctl enable --now pipewire-pulse
+sudo systemctl enable --now seatd
+systemctl --user enable hyprpolkitagent
 
 # --- AUR Helper ---
 if ! command -v yay &>/dev/null; then
@@ -89,7 +99,7 @@ else
 fi
 
 # --- Wallpaper + Matugen ---
-WALLPAPER="$HOME/Wallpapers/Tlou Trailer.jpg"
+WALLPAPER="$HOME/dotfiles/Wallpapers/Tlou Trailer.jpg"
 mkdir -p "$HOME/Wallpapers"
 
 # (Copy wallpaper if it's in the repo)
