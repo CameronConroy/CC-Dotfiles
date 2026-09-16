@@ -7,9 +7,8 @@ matugen
 nvim
 rofi
 swaync
-swayosd
 zsh
 ttf-jetbrains-mono-nerd
-iwd
 dolphin
 librewolf
+seatd
