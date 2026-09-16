@@ -12,3 +12,4 @@ ttf-jetbrains-mono-nerd
 dolphin
 librewolf
 seatd
+pciutils
