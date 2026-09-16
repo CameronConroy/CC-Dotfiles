@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-# --- Hyprland + System Dependencies ---
+# Hyprland + System Dependencies
 sudo pacman -S --needed \
     hyprland \
     hyprpaper \
@@ -28,7 +28,8 @@ sudo pacman -S --needed \
     fontconfig \
     mesa \
     git \
-    base-devel
+    base-devel \
+    ssdm 
     
     if lspci | grep -q "VGA.*NVIDIA"; then
         GPU_PKGS="nvidia-utils lib32-nvidia-utils"
@@ -45,9 +46,12 @@ sudo systemctl enable --now NetworkManager
 sudo systemctl enable --now pipewire
 sudo systemctl enable --now pipewire-pulse
 sudo systemctl enable --now seatd
-systemctl --user enable hyprpolkitagent
+sudo systemctl --user enable hyprpolkitagent
+sudo systemctl enable --now sddm
 
-# --- AUR Helper ---
+echo -e "[Autologin]\nUser=yourusername\nSession=hyprland" | sudo tee /etc/sddm.conf   
+
+# AUR Helper
 if ! command -v yay &>/dev/null; then
     cd /tmp
     git clone --depth 1 https://aur.archlinux.org/yay.git
@@ -55,7 +59,7 @@ if ! command -v yay &>/dev/null; then
     cd ~ && rm -rf /tmp/yay
 fi
 
-# --- App Packages ---
+# App Packages
 sudo pacman -S --needed $(cat requirements.txt)
 yay -S --needed $(cat aur.txt)
 
@@ -109,7 +113,7 @@ fi
 
 matugen image "$WALLPAPER"
 
-# --- Post-install ---
+# Post-install
 chsh -s "$(which zsh)"
 
 echo "Done. Log out and back in to start Hyprland."   
